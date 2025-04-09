@@ -55,6 +55,16 @@ builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 // Habilitar controladores y Swagger (si no está)
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -103,6 +113,7 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Inventario API v1");
 });
 app.UseAuthentication();
+app.UseCors("PermitirFrontend");
 app.UseAuthorization();
 app.UseHttpsRedirection();
 app.MapControllers();
