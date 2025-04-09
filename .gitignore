@@ -1,0 +1,59 @@
+# ========================================
+# .NET y ASP.NET Core
+# ========================================
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vcxproj.user
+
+# ========================================
+# SQLite
+# ========================================
+*.db
+*.sqlite
+*.sqlite3
+
+# ========================================
+# Visual Studio/Rider/VS Code
+# ========================================
+.vscode/
+.idea/
+*.csproj.user
+*.sln.iml
+
+# Rider (JetBrains)
+.idea/
+*.DotSettings.user
+
+# ========================================
+# Archivos de entorno y secretos
+# ========================================
+*.env
+.env.*
+secrets.json
+appsettings.Development.json
+
+# ========================================
+# Logs y dumps
+# ========================================
+*.log
+*.bak
+*.tmp
+*.swp
+*.pid
+
+# ========================================
+# Archivos generados por Swagger (opcional)
+# ========================================
+swagger/
+*.swagger.json
+
+# ========================================
+# Sistema operativo
+# ========================================
+.DS_Store
+Thumbs.db
+
