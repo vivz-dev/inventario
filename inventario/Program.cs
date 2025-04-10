@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using inventario.Data;
-using inventario.Repositories.Interfaces;
-using inventario.Repositories.Implementations;
 using inventario.Services.Interfaces;
 using inventario.Services.Implementations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -51,7 +49,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 

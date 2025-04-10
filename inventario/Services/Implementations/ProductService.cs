@@ -1,6 +1,5 @@
 using inventario.Data;
 using inventario.Models;
-using inventario.Repositories.Interfaces;
 using inventario.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +25,6 @@ public class ProductoService : IProductoService
         return producto ?? new Producto();
     }
 
-    // Implementación de ObtenerPorUsuarioId
     public async Task<List<Producto>> ObtenerPorUsuarioId(int usuarioId)
     {
         return await _context.Productos

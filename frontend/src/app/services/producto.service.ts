@@ -30,10 +30,6 @@ export class ProductoService {
     );
   }
 
-  eliminarProducto(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
   buscarProductos(query: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}?search=${query}`);
   }
@@ -46,5 +42,10 @@ export class ProductoService {
     });
 
     return this.http.post(this.apiUrl, producto, { headers });
+  }
+
+  eliminarProducto(id: number): Observable<void> {
+    const url = `${this.apiUrl}/${id}`;  // URL para eliminar un producto
+    return this.http.delete<void>(url);  // Realizamos una solicitud DELETE
   }
 }

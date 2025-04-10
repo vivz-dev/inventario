@@ -8,7 +8,7 @@
           <th>Nombre</th>
           <th>Precio</th>
           <th>Stock</th>
-          <th>Acciones</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -18,9 +18,9 @@
           <td>${{ producto.precio }}</td>
           <td>{{ producto.stock }}</td>
           <td>
-            <button class="edit-btn">Editar</button>
-            <button class="delete-btn">Eliminar</button>
-          </td>
+            <button class="round-btn" (click)="eliminarProducto(producto.id)">
+              <img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" alt="Eliminar" />
+            </button>
         </tr>
       </tbody>
     </table>
