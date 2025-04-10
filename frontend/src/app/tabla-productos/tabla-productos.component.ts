@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../services/producto.service'; // El servicio para interactuar con la API
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tabla-productos',
@@ -12,13 +13,15 @@ export class TablaProductosComponent implements OnInit {
 
   productos: any[] = [];
 
-  constructor(private productoService: ProductoService) {}
+  constructor(private productoService: ProductoService, private authService: AuthService) {}
 
   ngOnInit() {
     this.productoService.obtenerProductos()
     this.productoService.productos$.subscribe(productos => {
       this.productos = productos;
     });
+
+    console.log(this.authService.obtenerToken())
   }
 
   onDelete(id: number) {
@@ -46,6 +49,17 @@ export class TablaProductosComponent implements OnInit {
         alert('Error al eliminar el producto');
         console.error(error);
       });
+    }
+  }
+
+  eliminarStock(producto: any): void{
+    if (producto.stock > 1) {
+      producto.stock = producto.stock -1;
+      this.productoService.eliminarStock(producto).subscribe(() => {
+        this.obtenerProductos();
+      })
+    } else {
+      alert('El stock no puede ser eliminado');
     }
   }
 }

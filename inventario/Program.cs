@@ -40,12 +40,9 @@ builder.Services.AddAuthentication(options =>
 
 // Leer cadena de conexión
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-// Registrar DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -62,7 +59,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Habilitar controladores y Swagger (si no está)
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -72,8 +68,8 @@ builder.Services.AddSwaggerGen(options =>
         Title = "Inventario API",
         Version = "v1"
     });
-
-    // Configuración del botón "Authorize"
+    
+    // boton authorize
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -102,8 +98,7 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
+// el pipeline
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {

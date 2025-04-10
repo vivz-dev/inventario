@@ -96,7 +96,8 @@ public class ProductosController: ControllerBase
     public async Task<IActionResult> Actualizar(int id, [FromBody] ActualizarProductoDto dto)
     {
         if (id != dto.Id) return BadRequest("El ID no coincide.");
-
+        Console.WriteLine((id));
+        Console.WriteLine((dto.Id));
         var usuario = await ObtenerUsuarioActual();
         if (usuario == null) return Unauthorized();
 

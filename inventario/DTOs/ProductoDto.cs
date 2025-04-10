@@ -8,6 +8,5 @@ public class ProductoDto
     public string ImagenUrl { get; set; } = string.Empty;
     public int Stock { get; set; } 
     public int UsuarioId { get; set; } 
-
-
+    
 }

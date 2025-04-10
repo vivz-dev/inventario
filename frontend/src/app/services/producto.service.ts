@@ -31,7 +31,39 @@ export class ProductoService {
   }
 
   buscarProductos(query: string): Observable<any[]> {
+
     return this.http.get<any[]>(`${this.apiUrl}?search=${query}`);
+  }
+
+  eliminarStock(producto: any): any {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    const url_producto = this.apiUrl + "/" + producto.id;
+
+    const body ={
+      "id": producto.id,
+      "nombre": producto.nombre,
+      "precio": producto.precio,
+      "imagenUrl": producto.imagenUrl,
+      "stock": producto.stock - 1,
+    }
+
+    console.log(body)
+    console.log(producto.id)
+    return this.http.put<any>(url_producto, { headers, body });
+  }
+
+  buscarProductoId(id: number): any{
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    const url_producto = this.apiUrl + id;
+    return this.http.get<any>(url_producto);
   }
 
   agregarProducto(producto: any): Observable<any> {

@@ -43,7 +43,8 @@ public class ProductoService : IProductoService
     {
         var existente = await _context.Productos.FindAsync(producto.Id);
         if (existente == null) return false;
-
+        
+        existente.Id = producto.Id;
         existente.Nombre = producto.Nombre;
         existente.Precio = producto.Precio;
         existente.ImagenUrl = producto.ImagenUrl;
