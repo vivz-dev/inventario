@@ -1,0 +1,36 @@
+<div class="login-form align-center">
+  <h2>Registrar Producto</h2>
+
+  <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Contenedor con disposición horizontal -->
+    <div class="form-container">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" class="form-control" formControlName="nombre" required />
+      </div>
+
+      <div class="form-group">
+        <label for="precio">Precio</label>
+        <input type="number" id="precio" class="form-control" formControlName="precio" required min="0" />
+      </div>
+
+      <div class="form-group">
+        <label for="imagenUrl">URL</label>
+        <input type="text" id="imagenUrl" class="form-control" formControlName="imagenUrl" required />
+      </div>
+
+      <div class="form-group">
+        <label for="stock">Stock</label>
+        <input type="number" id="stock" class="form-control" formControlName="stock" required min="1" />
+      </div>
+    </div>
+
+    <div class="btn-div">
+      <button type="submit" class="login-btn" [disabled]="!productoForm.valid">Guardar</button>
+    </div>
+  </form>
+  
+  <!-- Mensaje de error si el formulario es inválido -->
+  <p *ngIf="productoForm.invalid" style="color: red;">Por favor complete todos los campos.</p>
+</div>

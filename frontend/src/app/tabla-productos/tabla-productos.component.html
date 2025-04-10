@@ -1,0 +1,28 @@
+<div class="tabla-productos">
+    <h2>Productos</h2>
+    
+    <table class="productos-table">
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos">
+          <td><img [src]="producto.imagenUrl" alt="{{ producto.nombre }}" width="50" /></td>
+          <td>{{ producto.nombre }}</td>
+          <td>${{ producto.precio }}</td>
+          <td>{{ producto.stock }}</td>
+          <td>
+            <button class="edit-btn">Editar</button>
+            <button class="delete-btn">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -26,4 +26,12 @@ public class UsuarioService: IUsuarioService
         await _context.SaveChangesAsync();
         return usuario;
     }
+    
+    public async Task<Usuario?> BuscarPorUsername(string username)
+    {
+        return await _context.Usuarios
+            .FirstOrDefaultAsync(u => u.Username == username); // Busca el usuario por su nombre de usuario
+    }
+    
+    
 }

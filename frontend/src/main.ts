@@ -8,7 +8,6 @@ import { TokenInterceptor } from './app/interceptors/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
-
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(HttpClientModule),

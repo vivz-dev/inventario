@@ -14,31 +14,38 @@ public class ProductoRepository: IProductoRepository
         _context = context;
     }
 
-    public async Task<List<Producto>> ObtenerTodos()
+    // Obtener todos los productos de un usuario
+    public async Task<List<Producto>> ObtenerTodos(int usuarioId)
     {
         return await _context.Productos
-            .Include(p => p.Precios)
+            .Where(p => p.UsuarioId == usuarioId)  // Filtra productos por usuario
+            .Include(p => p.Precio) // Asegúrate de incluir la lista de precios
             .ToListAsync();
     }
 
+    // Obtener un producto específico por Id
     public async Task<Producto?> ObtenerPorId(int id)
     {
         return await _context.Productos
-            .Include(p => p.Precios)
+            .Include(p => p.Precio)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
+    // Crear un nuevo producto asociado al usuario
     public async Task<Producto> Crear(Producto producto)
     {
-        _context.Productos.Add(producto);
+        _context.Productos.Add(producto); 
         await _context.SaveChangesAsync();
         return producto;
     }
 
     public async Task<bool> Actualizar(Producto producto)
     {
-        if (!_context.Productos.Any(p => p.Id == producto.Id)) return false;
-        _context.Productos.Update(producto);
+        var existente = await _context.Productos.FirstOrDefaultAsync(p => p.Id == producto.Id);
+
+        if (existente == null || existente.UsuarioId != producto.UsuarioId) return false;
+
+        _context.Entry(existente).CurrentValues.SetValues(producto);
         await _context.SaveChangesAsync();
         return true;
     }
@@ -46,10 +53,22 @@ public class ProductoRepository: IProductoRepository
     public async Task<bool> Eliminar(int id)
     {
         var producto = await ObtenerPorId(id);
+        
+        // Verificar que el producto pertenece al usuario
         if (producto == null) return false;
 
         _context.Productos.Remove(producto);
         await _context.SaveChangesAsync();
         return true;
     }
+    
+    public async Task<List<Producto>> ObtenerPorUsuarioId(int usuarioId)
+    {
+        return await _context.Productos
+            .Where(p => p.UsuarioId == usuarioId) // Filtra por el ID del usuario
+            .Include(p => p.Precio)
+            .ToListAsync();
+    }
+
+
 }

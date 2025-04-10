@@ -6,4 +6,6 @@ public interface IUsuarioService
 {
     Task<Usuario?> ValidarCredenciales(string username, string password);
     Task<Usuario> Crear(Usuario usuario);
+    Task<Usuario?> BuscarPorUsername(string username); 
+    
 }
